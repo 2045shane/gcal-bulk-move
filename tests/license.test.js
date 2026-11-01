@@ -1,0 +1,2 @@
+const {test}=require('node:test'),a=require('node:assert/strict'),L=require('../src/lib/license');
+test('offline license validation',async()=>{const key=await L.issueLicense();a.match(key,/^GCB1\.[a-f0-9]{64}$/);a.equal(await L.verifyLicense(' '+key+' '),true);for(const v of [null,'',key.slice(0,-1),key.replace('GCB1','GAZ1'),key.slice(0,-1)+(key.endsWith('0')?'1':'0')])a.equal(await L.verifyLicense(v),false);});

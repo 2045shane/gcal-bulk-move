@@ -1,0 +1,44 @@
+{
+  "manifest_version": 3,
+  "name": "Google Calendar 批量移动/改日程",
+  "version": "0.1.0",
+  "description": "勾选当前视图日程，预览后批量平移或删除。",
+  "permissions": [
+    "storage"
+  ],
+  "host_permissions": [
+    "https://calendar.google.com/*"
+  ],
+  "background": {
+    "service_worker": "src/background/worker.js"
+  },
+  "options_page": "src/options/options.html",
+  "action": {
+    "default_title": "打开批量日程设置"
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://calendar.google.com/*"
+      ],
+      "js": [
+        "src/lib/license.js",
+        "src/lib/quota.js",
+        "src/lib/shift.js",
+        "src/lib/timezone.js",
+        "src/lib/plan.js",
+        "src/lib/selectors.js",
+        "src/content/content.js"
+      ],
+      "css": [
+        "src/content/content.css"
+      ],
+      "run_at": "document_idle"
+    }
+  ]
+}

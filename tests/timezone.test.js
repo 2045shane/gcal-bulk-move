@@ -1,0 +1,2 @@
+const {test}=require('node:test'),a=require('node:assert/strict');require('../src/lib/shift');const T=require('../src/lib/timezone');
+test('Intl conversion and invalid zone',()=>{const date=new Date('2026-01-01T00:00Z');a.match(T.timezoneText(date,'Asia/Shanghai'),/08:00/);a.match(T.timezoneText(date,'America/New_York'),/19:00/);a.throws(()=>T.timezoneText(date,'bad/zone'),RangeError);a.match(T.timezoneText('2026-01-01','UTC',true),/全天/);});
